@@ -24,6 +24,7 @@ public class MonitoringService {
 		System.out.println(input);
 		
 		login();
+		create_host("ip");
 		System.out.println(auth);
 		return "done";
 	
@@ -49,6 +50,13 @@ public class MonitoringService {
 		}
 	
 			
+	}
+
+	public static create_host(String ip)throws FileNotFoundException, UnsupportedEncodingException, ParseException, HttpException, IOException{
+		PutMethod putMethod_createhost = new PutMethod(ZABBIX_API_URL);
+    	putMethod_createhost.setRequestHeader("Content-Type", "application/json-rpc");
+		putMethod_createhost.setRequestBody(zabbixapi.create_host(ip,auth)); 
+    	client.executeMethod(putMethod_createhost);
 	}
 	
 	public static InputStream fromString(String str) throws UnsupportedEncodingException {
