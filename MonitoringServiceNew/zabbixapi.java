@@ -40,6 +40,27 @@ public class zabbixapi {
         //return fromString(createitem);
     }
 
+    public static String create_item_cpu(String app , String hostid , String interfaceid , String[] application , String  delay , String auth ){
+        return create_item(app+" CPU_usage" , "proc.cpu.util["+app+"]" , hostid , interfaceid , application , delay ,auth);
+    }
+
+    public static String create_item_mem(String app , String hostid , String interfaceid , String[] application , String  delay , String auth ){
+        return create_item(app+" mem_usage" , "proc.mem["+app+"]" , hostid , interfaceid , application , delay ,auth);
+    }
+
+    public static String get_interfaceid (String hostid , String auth){
+        String getinterface = "{ \"jsonrpc\": \"2.0\" , \"method\" : \"hostinterface.get\",  \"params\": { \"output\": \"extend\", \"hostids\": \""+hostid+"\"},";
+        getinterface += "\"auth\": \""+auth+"\",\"id\": 1} ";
+        return getinterface;
+        //return fromString(getinterface);
+    }
+
+    public static String create_graph(String name , String auth , String itemid){
+        String creategraph = "{ \"jsonrpc\": \"2.0\", \"method\": \"graph.create\",\"params\": {\"name\": \""+name+"\",\"gitems\":";
+        creategraph += "[ {\"itemid\": \""+itemid+"\",\"color\": \"00AA00\" }]},\"auth\": \""+auth+"\",\"id\": 1 }";
+        return creategraph ;
+        //return fromString(creategraph);
+    }
 
     private static String create_host( String IP , String auth ,String host, String group , String interfaces ){
         String create_host = "{ \"jsonrpc\": \"2.0\", \"method\": \"host.create\", \"params\": { \"host\": \""+host+"\",";
