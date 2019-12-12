@@ -28,16 +28,17 @@ public class MonitoringService {
 		//System.out.println(input);
 		JSONObject inputObj = new JSONObject(input);
 		login();
-		create_host("127.0.0.1", inputObj.getString("app_name"));  // assume that the ip is the host name 
-		get_host( inputObj.getString("app_name"));
-		get_interface();
-		createItems(inputObj.getString("app_name"));
-		createGraphs(inputObj.getString("app_name"));
+		if("deploy".equals(inputObj.get("method"))){
+			create_host("127.0.0.1", inputObj.getString("app_name"));  // assume that the ip is the host name 
+			get_host( inputObj.getString("app_name"));
+			get_interface();
+			createItems(inputObj.getString("app_name"));
+			createGraphs(inputObj.getString("app_name"));
+		}
+		else{
+			System.out.println("Undeploy is not implemented yet!");
+		}
 		
-		System.out.println(hostid);
-		System.out.println(interfaceid);
-		System.out.print(itemcpuid);
-		System.out.print(itemmemid);
 		return "done";
 	
 	}
