@@ -10,11 +10,6 @@ public class zabbixapi {
         //return fromString(login);
     }
 
-    public static String creeate_host(String ip , String auth){
-        return create_host(ip,auth,"host name here",groups("1"),interfaces(ip,"10051"));
-        //return fromString(create_host(ip,auth,groups(),interfaces(ip)));
-    }
-
     public static String get_host(String host , String auth){
         String gethost = "{ \"jsonrpc\" : \"2.0\" , \"method\" : \"host.get\", \"params\" : { \"filter\" : { \"host\" : [ \""+host+"\"]}},\"auth\": \""+auth+"\",\"id\" : 1}";
         return gethost ;
@@ -60,6 +55,11 @@ public class zabbixapi {
         creategraph += "[ {\"itemid\": \""+itemid+"\",\"color\": \"00AA00\" }]},\"auth\": \""+auth+"\",\"id\": 1 }";
         return creategraph ;
         //return fromString(creategraph);
+    }
+
+    public static String creeate_host(String ip , String auth){ // the ip represents the host name here  
+        return create_host(ip,auth,ip,groups("1"),interfaces("127.0.0.1","10050"));
+        //return fromString(create_host(ip,auth,groups(),interfaces(ip)));
     }
 
     private static String create_host( String IP , String auth ,String host, String group , String interfaces ){
