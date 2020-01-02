@@ -6,10 +6,10 @@ import java.io.UnsupportedEncodingException;
 
 public class zabbixapi {
 
-    public static String login(String username,String password){
+    public static InputStream login(String username,String password){
         String login = "{\"jsonrpc\":\"2.0\",\"method\":\"user.login\",\"params\":{\"user\":\""+username+"\",\"password\":\""+password+"\"},\"id\":1}";
-        return login;
-        //return fromString(login);
+        //return login;
+        return fromString(login);
     }
 
     public static InputStream get_host(String host , String auth){
@@ -74,6 +74,13 @@ public class zabbixapi {
         String groups = "\"groups\": [{ \"groupid\" : \""+groupid+"\" }]";
         return groups ;
     }
+
+    public static InputStream delete_host(String hostid , String auth){
+        String deletehost = " { \"jsonrpc\": \"2.0\",\"method\": \"host.delete\",\"params\": [\""+hostid+"\"],\"auth\": \""+auth+"\",\"id\": 1 } ";
+        //return deletehost ;
+        return fromString(deletehost);
+    }
+
 
     private static InputStream fromString(String str){
         byte[] bytes ;

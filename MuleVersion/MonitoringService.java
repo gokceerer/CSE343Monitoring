@@ -69,6 +69,17 @@ public class MonitoringService {
 		}
 	}
 
+	public static void delete_host(String hostid){
+		try{	
+			PutMethod putMethod_delete = new PutMethod(ZABBIX_API_URL);
+	    	putMethod_delete.setRequestHeader("Content-Type", "application/json-rpc");
+			putMethod_delete.setRequestBody(zabbixapi.delete_host(hostid, auth)); 
+	    	client.executeMethod(putMethod_deletehost);
+	    }catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	public static void get_host(String name){
 		try{	
 			PutMethod putMethod_gethost = new PutMethod(ZABBIX_API_URL);
