@@ -36,6 +36,7 @@ public class MonitoringService {
 			createGraphs(inputObj.getString("app_name"));
 		}
 		else{
+			delete_host();
 			System.out.println("Undeploy is not implemented yet!");
 		}
 		
@@ -69,7 +70,7 @@ public class MonitoringService {
 		}
 	}
 
-	public static void delete_host(String hostid){
+	public static void delete_host(){
 		try{	
 			PutMethod putMethod_delete = new PutMethod(ZABBIX_API_URL);
 	    	putMethod_delete.setRequestHeader("Content-Type", "application/json-rpc");
